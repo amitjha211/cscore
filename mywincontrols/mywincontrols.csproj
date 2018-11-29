@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{338339EE-AA6B-4B95-A6AA-583EB49D4722}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>mywincontrols</RootNamespace>
+    <AssemblyName>mywincontrols</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\output\mywincontrols\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\Common.dll</HintPath>
+    </Reference>
+    <Reference Include="DAL, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\output\dal\DAL.dll</HintPath>
+    </Reference>
+    <Reference Include="GvS.Controls.HtmlTextbox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\GvS.Controls.HtmlTextbox.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Binder\Binder.cs" />
+    <Compile Include="Binder\BinderCheckbox.cs" />
+    <Compile Include="Binder\BinderDatePicker.cs" />
+    <Compile Include="Binder\BinderDropDown.cs" />
+    <Compile Include="Binder\BinderFieldBase.cs" />
+    <Compile Include="Binder\BinderHtmlEditor.cs" />
+    <Compile Include="Binder\BinderText.cs" />
+    <Compile Include="Binder\FileBinder.cs" />
+    <Compile Include="frmRPT_Viewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRPT_Viewer.designer.cs">
+      <DependentUpon>frmRPT_Viewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSearchBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSearchBox.Designer.cs">
+      <DependentUpon>frmSearchBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="myGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ucDuration.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucDuration.Designer.cs">
+      <DependentUpon>ucDuration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucFileSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucFileSelector.Designer.cs">
+      <DependentUpon>ucFileSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmRPT_Viewer.resx">
+      <DependentUpon>frmRPT_Viewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSearchBox.resx">
+      <DependentUpon>frmSearchBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucDuration.resx">
+      <DependentUpon>ucDuration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucFileSelector.resx">
+      <DependentUpon>ucFileSelector.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

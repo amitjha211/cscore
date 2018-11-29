@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D96347CB-C8EA-4D20-BDDA-98473036A07F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>winui</RootNamespace>
+    <AssemblyName>winui</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\output\winui\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\Common.dll</HintPath>
+    </Reference>
+    <Reference Include="DAL, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\output\dal\DAL.dll</HintPath>
+    </Reference>
+    <Reference Include="GvS.Controls.HtmlTextbox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\GvS.Controls.HtmlTextbox.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="appConfig\clsAppConfig.cs" />
+    <Compile Include="appConfig\frmConfig_GetData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="appConfig\frmConfig_GetData.Designer.cs">
+      <DependentUpon>frmConfig_GetData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="appConfig\frmConnectionString.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="appConfig\frmConnectionString.Designer.cs">
+      <DependentUpon>frmConnectionString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="appConfig\frmGetData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="appConfig\frmGetData.Designer.cs">
+      <DependentUpon>frmGetData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="appConfig\frmMainAppConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="appConfig\frmMainAppConfig.Designer.cs">
+      <DependentUpon>frmMainAppConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Binder\Binder.cs" />
+    <Compile Include="Binder\BinderCheckbox.cs" />
+    <Compile Include="Binder\BinderDatePicker.cs" />
+    <Compile Include="Binder\BinderDropDown.cs" />
+    <Compile Include="Binder\BinderFieldBase.cs" />
+    <Compile Include="Binder\BinderHtmlEditor.cs" />
+    <Compile Include="Binder\BinderText.cs" />
+    <Compile Include="Binder\FileBinder.cs" />
+    <Compile Include="clsFormNavigatorFromXml.cs" />
+    <Compile Include="CompileCSCAtRuntime.cs" />
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain2.Designer.cs">
+      <DependentUpon>frmMain2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBase.designer.cs">
+      <DependentUpon>frmBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGridBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGridSimple.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGridSimple.designer.cs">
+      <DependentUpon>frmGridSimple.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRPT_Viewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRPT_Viewer.designer.cs">
+      <DependentUpon>frmRPT_Viewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSearchBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSearchBox.Designer.cs">
+      <DependentUpon>frmSearchBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iFormFactory.cs" />
+    <Compile Include="iFormNavigator.cs" />
+    <Compile Include="myGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="searchResult.cs" />
+    <Compile Include="TreeDesigner\clsImageList.cs" />
+    <Compile Include="TreeDesigner\clsTreeDesigner.cs" />
+    <Compile Include="TreeDesigner\frmImageList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TreeDesigner\frmImageList.Designer.cs">
+      <DependentUpon>frmImageList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeDesigner\frmTreeDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TreeDesigner\frmTreeDesigner.Designer.cs">
+      <DependentUpon>frmTreeDesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucFileSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucFileSelector.Designer.cs">
+      <DependentUpon>ucFileSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ui.cs" />
+    <Compile Include="utility.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="appConfig\frmConfig_GetData.resx">
+      <DependentUpon>frmConfig_GetData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="appConfig\frmConnectionString.resx">
+      <DependentUpon>frmConnectionString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="appConfig\frmGetData.resx">
+      <DependentUpon>frmGetData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="appConfig\frmMainAppConfig.resx">
+      <DependentUpon>frmMainAppConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEntry.resx">
+      <DependentUpon>frmEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain2.resx">
+      <DependentUpon>frmMain2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBase.resx">
+      <DependentUpon>frmBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGridSimple.resx">
+      <DependentUpon>frmGridSimple.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRPT_Viewer.resx">
+      <DependentUpon>frmRPT_Viewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSearchBox.resx">
+      <DependentUpon>frmSearchBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TreeDesigner\frmImageList.resx">
+      <DependentUpon>frmImageList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TreeDesigner\frmTreeDesigner.resx">
+      <DependentUpon>frmTreeDesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucFileSelector.resx">
+      <DependentUpon>ucFileSelector.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ntier\NTier_Web.csproj">
+      <Project>{93A0DC0E-8B0E-4040-980B-EFCF91C336B0}</Project>
+      <Name>NTier_Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

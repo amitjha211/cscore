@@ -1,0 +1,12 @@
+dal/bin/**/* 
+mywincontrols/bin/**/* 
+ntier/bin/**/* 
+webui/bin/**/* 
+winui/bin/**/* 
+
+dal/obj/**/* 
+mywincontrols/obj/**/* 
+ntier/obj/**/* 
+webui/obj/**/* 
+winui/obj/**/* 
+
