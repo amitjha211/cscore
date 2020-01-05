@@ -9,6 +9,8 @@ namespace NTier.adapter
 {
     public abstract class clsDataAdapterBase : iAdapter
     {
+
+        public abstract string databaseType {get;}
         public abstract void exec(clsCmd cmd);
         public abstract DataTable getData(clsCmd cmd);
         public abstract object execScalar(clsCmd cmd);

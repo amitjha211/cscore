@@ -275,9 +275,7 @@ namespace NTier.Request
                 ,iBussinessTier oTier)
             {
                 NTier.Request.iRequest oReq = _oAssembly.createInstance(this.AssemblyName, this.classPath) as iRequest;
-
                 oReq.setTier(oTier);
-
 
                 object[] objParams = new object[] { cmd };
                 var m = oReq.GetType().GetMethod(this.functionName);

@@ -13,11 +13,13 @@ namespace NTier.sqlbuilder
         public string ViewName { get; set; }
         public string PrimaryKeyField { get; set; }
         public bool isIdentity { get; set; }
+        public string databaseType { get; set; }
 
         public sqlCRUD(string sTableName
             , string sViewName
             , string sPrimaryKeyField
             , bool blnIsIdenity
+            , string dbType
             )
         {
 
@@ -49,14 +51,13 @@ namespace NTier.sqlbuilder
                             break;
                         case "Int32":
                         case "Int16":
-                            cmd.setValue(col.ColumnName, g.parseInt( cmd.getStringValue(col.ColumnName)));
+                            cmd.setValue(col.ColumnName, g.parseInt(cmd.getStringValue(col.ColumnName)));
                             break;
                     }
 
                 }
             }
         }
-
 
         public clsCmd getInsertCommand(DataTable t
             , clsCmd cmd)
@@ -161,10 +162,11 @@ namespace NTier.sqlbuilder
 
             sb1.Append(" )");
 
-            if (isIdentity)
-                sb1.AppendLine("select SCOPE_IDENTITY()");
-            else
-                sb1.AppendLine("select @id");
+            if (databaseType == "mssql")
+                if (isIdentity)
+                    sb1.AppendLine("select SCOPE_IDENTITY()");
+                else
+                    sb1.AppendLine("select @id");
 
 
             cmd2.SQL = sb1.ToString();

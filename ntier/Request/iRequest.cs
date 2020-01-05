@@ -170,10 +170,10 @@ namespace NTier.Request
             {
                 NTier.Request.iRequest iCmd = AppDomain.CurrentDomain.CreateInstance(this.assemblyName, this.classPath).Unwrap() as iRequest;
                 iCmd.setTier(this._tier);
-
                 object[] objParams = new object[] { cmd };
                 var m = iCmd.GetType().GetMethod(this.func);
                 clsMsg msg = (clsMsg)m.Invoke(iCmd, objParams);
+
                 return msg;
             }
             else

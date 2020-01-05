@@ -16,7 +16,7 @@ namespace NTier.Request
         public sqlAppConfig(string sConnectionString)
         {
             _connectionString = sConnectionString;
-            adapter = new clsSQLAdapter(_connectionString);
+            adapter = new clsMSSQLAdapter(_connectionString);
         }
         public clsDataAdapterBase getAdapter()
         {

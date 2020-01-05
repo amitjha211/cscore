@@ -62,11 +62,7 @@ namespace System
 
 
                 oFile = new FileData();
-
-
-
                 oFile.ContentType = "application/unknown";
-
                 oFile.FileName = System.IO.Path.GetFileName(sPath);
                 oFile.FileExtension = System.IO.Path.GetExtension(sPath);
                 oFile.Data = System.IO.File.ReadAllBytes(sPath);

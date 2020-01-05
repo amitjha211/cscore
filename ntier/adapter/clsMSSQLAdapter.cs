@@ -7,14 +7,18 @@ using System.Data;
 using System.Data.SqlClient;
 namespace NTier.adapter
 {
-    internal class clsSQLAdapter : clsDataAdapterBase
+    internal class clsMSSQLAdapter : clsDataAdapterBase
     {
         string _connectionString = "";
-        public clsSQLAdapter(string sConnectionString)
+        public clsMSSQLAdapter(string sConnectionString)
         {
             _connectionString = sConnectionString;
         }
 
+        public override string databaseType
+        {
+            get { return "mssql"; }
+        }
         
         public override void exec(clsCmd cmd)
         {

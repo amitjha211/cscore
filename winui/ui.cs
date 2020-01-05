@@ -16,7 +16,7 @@ namespace System
         public static string appServerRootPath = "";
 
         public static iBussinessTier oTier;
-        internal static iFormNavigator oForms;
+        public static iFormNavigator oForms;
 
         public static void alert(string msg)
         {
@@ -42,7 +42,6 @@ namespace System
         }
 
 
-
         public static void fillList(DataTable src
             , ListControl cmb)
         {
@@ -60,7 +59,15 @@ namespace System
             src.Rows.InsertAt(row, 0);
 
             cmb.DataSource = src;
+
+            
         }
+
+        public static void setMainForm(Form frmMain)
+        {
+            oForms.setMainForm(frmMain);
+        }
+
 
         public static searchResult showSearchBox(DataTable t, string strTitle = "Search", DAL.GridColumns cols = null)
         {
@@ -113,6 +120,7 @@ namespace System
             , clsCmd cmd)
         {
             oForms.showForm(sKey, cmd);
+            
         }
         internal static string getTreeXmlPath()
         {
@@ -138,6 +146,21 @@ namespace System
             initBll();
             oForms = winui.utility.formNavigator(getFormConfigXmlPath());
             oForms.setTier(oTier);
+        }
+
+
+        public static string showOpenFile(string sFilter = "")
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = sFilter;
+
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                return openFile.FileName;
+            }
+
+            return "";
+            
         }
 
         public static void initBll()

@@ -19,7 +19,10 @@ namespace NTier.adapter
             switch (sConnectionType.ToLower())
             {
                 case "mssql":
-                    _adapter = new clsSQLAdapter(sConnectionString);
+                    _adapter = new clsMSSQLAdapter(sConnectionString);
+                    return _adapter;
+                case "sqlite":
+                    _adapter = new clsSQLiteAdapter(sConnectionString);
                     return _adapter;
                 case "mysql":
                 case "access":
@@ -31,6 +34,18 @@ namespace NTier.adapter
 
         public static void setCommand(clsCmd cmd
             , SqlCommand sqlcmd
+            , CommandType iCommandType = CommandType.Text)
+        {
+            foreach (var f in cmd)
+            {
+                sqlcmd.Parameters.AddWithValue(f.Name, f.Value);
+            }
+
+            sqlcmd.CommandType = iCommandType;
+            sqlcmd.CommandText = cmd.SQL;
+        }
+        public static void setCommand(clsCmd cmd
+            , System.Data.SQLite.SQLiteCommand sqlcmd
             , CommandType iCommandType = CommandType.Text)
         {
             foreach (var f in cmd)

@@ -13,6 +13,7 @@ namespace NTier.adapter
         void exec(clsCmd cmd);
         DataTable getData(clsCmd cmd);
         object execScalar(clsCmd cmd);
+         string databaseType { get; }
     }
 
     
