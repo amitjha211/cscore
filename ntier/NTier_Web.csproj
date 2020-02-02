@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
     </DocumentationFile>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -80,6 +81,16 @@
     <Compile Include="adapter\iAdapter.cs" />
     <Compile Include="adapter\utility.cs" />
     <Compile Include="clsAppServer.cs" />
+    <Compile Include="middleware\clsAPIResult.cs" />
+    <Compile Include="middleware\clsAppService.cs" />
+    <Compile Include="middleware\clsMiddleWareObjects.cs" />
+    <Compile Include="middleware\clsTest.cs" />
+    <Compile Include="middleware\crud\clsGetData.cs" />
+    <Compile Include="middleware\crud\clsTableSave.cs" />
+    <Compile Include="middleware\crud\clsTableDelete.cs" />
+    <Compile Include="middleware\JSONParser.cs" />
+    <Compile Include="middleware\validations\basic.cs" />
+    <Compile Include="myAssembly2.cs" />
     <Compile Include="Request\clsBussinessTier2Base.cs" />
     <Compile Include="Request\clsBussinessTier2Web.cs" />
     <Compile Include="Request\clsBussinessTierFromXmlBase.cs" />
@@ -117,7 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
-    <Folder Include="winui\TreeDesigner\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

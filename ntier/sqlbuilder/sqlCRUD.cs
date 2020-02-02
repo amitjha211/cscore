@@ -8,7 +8,6 @@ namespace NTier.sqlbuilder
 {
     public class sqlCRUD
     {
-
         public string TableName { get; set; }
         public string ViewName { get; set; }
         public string PrimaryKeyField { get; set; }
@@ -218,8 +217,8 @@ namespace NTier.sqlbuilder
             }
 
             sb1.AppendFormat(" where {0} = {1} \n\r", PrimaryKeyField, iID);
-
-            sb1.AppendFormat("select {0}", iID);
+            
+            if(databaseType=="mssql") sb1.AppendFormat("select {0}", iID);
 
             cmd2.SQL = sb1.ToString();
 

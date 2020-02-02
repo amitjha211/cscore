@@ -16,7 +16,7 @@ namespace NTier.CRUD
             , string sViewName
             , string sPrimaryKey
             , bool blnIsIdentity)
-            : base(sTableName, sViewName, sPrimaryKey, blnIsIdentity,adapter.databaseType)
+            : base(sTableName, sViewName, sPrimaryKey, blnIsIdentity, adapter.databaseType)
         {
             _adapter = adapter;
         }
@@ -38,7 +38,7 @@ namespace NTier.CRUD
         public void updateTable(DataTable t)
         {
             var tTable = _adapter.getData("select top 0 * from " + TableName);
-            
+
             foreach (DataRow r in t.Rows)
             {
                 var cmd2 = getCmdFromRow(r);
@@ -70,24 +70,28 @@ namespace NTier.CRUD
 
         public clsMsg save(clsCmd cmd)
         {
+
+            string sSaveFlag = cmd.getIntValue(PrimaryKeyField) == 0 ? "insert" : "update";
+
             var t = getEmptyTable();
             var cmd2 = getSaveCommand(t, cmd);
 
+
             try
             {
-                object obj=null;
-                switch (_adapter.databaseType )
+                object obj = null;
+                switch (_adapter.databaseType)
                 {
                     case "mssql":
                         obj = _adapter.execScalar(cmd2);
                         break;
                     case "sqlite":
                         _adapter.exec(cmd2);
-                        obj = _adapter.execScalar("SELECT last_insert_rowid()");
+                        if (sSaveFlag == "insert") obj = _adapter.execScalar("SELECT last_insert_rowid()");
                         break;
                 }
-                
-                
+
+
                 return g.msg("", obj);
             }
             catch (Exception ex)
@@ -97,12 +101,12 @@ namespace NTier.CRUD
 
         }
 
-
         public void delete(clsCmd cmd)
         {
             var iID = cmd.getIntValue("id");
             string q = "delete from " + TableName + " where " + " " + PrimaryKeyField + " = " + iID;
             _adapter.exec(q);
         }
+
     }
 }

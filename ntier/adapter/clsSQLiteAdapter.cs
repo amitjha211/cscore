@@ -10,59 +10,68 @@ namespace NTier.adapter
     public class clsSQLiteAdapter : clsDataAdapterBase
     {
         string _connectionString = "";
+        SQLiteConnection _con;
         public clsSQLiteAdapter(string sConnectionString)
         {
             _connectionString = sConnectionString;
+        }
+
+        ~clsSQLiteAdapter()
+        {
+
+            //if (_con != null &&  _con.State != ConnectionState.Closed)
+            //{
+            //    _con.Close();
+            //    _con.Dispose();
+            //}
+        }
+        
+
+        private SQLiteConnection getConnection()
+        {
+            if (_con != null && _con.State != ConnectionState.Closed) return _con;
+
+            _con = new SQLiteConnection(_connectionString);
+            return _con.OpenAndReturn();
         }
 
         public override string databaseType
         {
             get { return "sqlite"; }
         }
-        
+
         public override void exec(clsCmd cmd)
         {
-            using (SQLiteConnection conn = new SQLiteConnection(_connectionString))
-            {
-                conn.Open();
-                var sqlcmd = conn.CreateCommand();
-                utility.setCommand(cmd, sqlcmd);
-                sqlcmd.CommandText = cmd.SQL;
-                sqlcmd.CommandType = cmd.CommandType;
-
-                sqlcmd.ExecuteNonQuery();
-            }
+            var sqlcmd = getConnection().CreateCommand();
+            utility.setCommand(cmd, sqlcmd);
+            sqlcmd.CommandText = cmd.SQL;
+            sqlcmd.CommandType = cmd.CommandType;
+            sqlcmd.ExecuteNonQuery();
         }
 
         public override DataTable getData(clsCmd cmd)
         {
-            using (SQLiteConnection conn = new SQLiteConnection(_connectionString))
-            {
-                var sqlcmd = conn.CreateCommand();
-                utility.setCommand(cmd, sqlcmd);
-                sqlcmd.CommandText = cmd.SQL;
-                sqlcmd.CommandType = cmd.CommandType;
+            var sqlcmd = getConnection().CreateCommand();
+            utility.setCommand(cmd, sqlcmd);
+            sqlcmd.CommandText = cmd.SQL;
+            sqlcmd.CommandType = cmd.CommandType;
 
-                SQLiteDataAdapter ad = new SQLiteDataAdapter(sqlcmd);
-                DataTable t = new DataTable();
-                ad.Fill(t);
-                return t;
-            }
+            SQLiteDataAdapter ad = new SQLiteDataAdapter(sqlcmd);
+            DataTable t = new DataTable();
+            ad.Fill(t);
+            return t;
+
         }
 
         public override object execScalar(clsCmd cmd)
         {
-            using (SQLiteConnection conn = new SQLiteConnection(_connectionString))
-            {
-                conn.Open();
-                var sqlcmd = conn.CreateCommand();
-               
-                utility.setCommand(cmd, sqlcmd);
-                sqlcmd.CommandText = cmd.SQL;
-                sqlcmd.CommandType = cmd.CommandType;
+            var sqlcmd = getConnection().CreateCommand();
 
-                return sqlcmd.ExecuteScalar();
-            }
+            utility.setCommand(cmd, sqlcmd);
+            sqlcmd.CommandText = cmd.SQL;
+            sqlcmd.CommandType = cmd.CommandType;
+
+            return sqlcmd.ExecuteScalar();
         }
 
 
@@ -78,7 +87,7 @@ namespace NTier.adapter
         private void save()
         {
 
- 
+
         }
 
         //private clsMsg save_old(SqlConnection cnn, clsCmd cmd,string _TableName,string _sPrimaryKeyField)
@@ -242,7 +251,7 @@ namespace NTier.adapter
         //    }
 
         //}
-    
+
     }
 
 }

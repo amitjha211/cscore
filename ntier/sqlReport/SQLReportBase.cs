@@ -18,7 +18,6 @@ namespace NTier.sqlReport
         public abstract void render(string sType, Stream st);
         public abstract byte[] export(string fileType);
         
-        
 
         public void addTable(string sTableName, DataTable t)
         {

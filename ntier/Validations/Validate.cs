@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DAL;
+
 namespace NTier.Validations
 {
 
@@ -10,7 +11,6 @@ namespace NTier.Validations
     {
         clsMsg validate(clsCmd cmd);
     }
-
 
     internal interface iValidations : IList<iValidate>, iValidate
     {
@@ -89,8 +89,6 @@ namespace NTier.Validations
             
         }
 
-        
-
         public clsMsg validate(clsCmd cmd)
         {
 
@@ -103,14 +101,6 @@ namespace NTier.Validations
 
             return g.msg();
         }
-
-
-
-
-
-
-        
-
     }
 
 }

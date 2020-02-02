@@ -31,8 +31,6 @@ namespace NTier.Request
                 }
             }
         }
-        
-        
 
         clsAppServerBase _oAppServerInfo;
         string _sMainApp;

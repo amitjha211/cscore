@@ -36,5 +36,6 @@ namespace NTier.adapter
             cmd.SQL = sql;
             return getData(cmd);
         }
+
     }
 }
