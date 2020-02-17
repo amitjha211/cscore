@@ -6,10 +6,8 @@ using System.Windows.Forms;
 using System.Data;
 using DAL;
 
-
 namespace winui
 {
-
 
     public class MyGrid : DataGridView
     {

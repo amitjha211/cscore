@@ -395,6 +395,21 @@ namespace System
             }
             return lstRows;
         }
+
+
+        public static object createObjectFromAssemblyInfo(string sAssemblyName, string sClassPath)
+        {
+            return AppDomain.CurrentDomain.CreateInstance(sAssemblyName, sClassPath).Unwrap();
+        }
+        public static object createObjectFromAssemblyInfo(Type t)
+        {
+            return Activator.CreateInstance(t);
+        }
+
+        public static object createObjectFromAssemblyInfo<T>()
+        {
+            return Activator.CreateInstance(typeof(T));
+        }
     }
 
 

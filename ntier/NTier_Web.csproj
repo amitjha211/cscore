@@ -83,12 +83,18 @@
     <Compile Include="clsAppServer.cs" />
     <Compile Include="middleware\clsAPIResult.cs" />
     <Compile Include="middleware\clsAppService.cs" />
+    <Compile Include="middleware\clsCallObject.cs" />
     <Compile Include="middleware\clsMiddleWareObjects.cs" />
+    <Compile Include="middleware\clsObjectBase.cs" />
     <Compile Include="middleware\clsTest.cs" />
+    <Compile Include="middleware\clsAppService2.cs" />
+    <Compile Include="middleware\crud\clsCustomModule.cs" />
     <Compile Include="middleware\crud\clsGetData.cs" />
     <Compile Include="middleware\crud\clsTableSave.cs" />
     <Compile Include="middleware\crud\clsTableDelete.cs" />
-    <Compile Include="middleware\JSONParser.cs" />
+    <Compile Include="middleware\clsJSONParser.cs" />
+    <Compile Include="middleware\db\clsDB.cs" />
+    <Compile Include="middleware\ds\clsDS.cs" />
     <Compile Include="middleware\validations\basic.cs" />
     <Compile Include="myAssembly2.cs" />
     <Compile Include="Request\clsBussinessTier2Base.cs" />
@@ -125,6 +131,7 @@
     <Compile Include="Validations\validateNumber.cs" />
     <Compile Include="Validations\validateText.cs" />
     <Compile Include="Validations\validateUnknown.cs" />
+    <Compile Include="middleware\validations\vField.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

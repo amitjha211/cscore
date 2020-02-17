@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using middleware.db;
 
 namespace middleware
 {
@@ -10,28 +11,55 @@ namespace middleware
     {
         string getAppSetting(string skey);
         NTier.adapter.clsDataAdapterBase getAdapter(string sConnectionName = "main");
-
         clsAPIResponse call(string sPath, clsCmd cmd);
-
     }
 
-    public class clsAppService : iAppService
+    public class clsAppService_old : iAppService
     {
 
         public List<clsAPIRequest> lstRequest = new List<clsAPIRequest>();
-        clsMiddleWareObjects middleObjects;
+        clsJSONParser oJSONParser = new middleware.clsJSONParser();
+
+        clsMiddleWareObjects middleObjects ;
 
         List<clsValidation> validations = new List<clsValidation>();
 
-        public clsAppService(string sPath)
+        public void includeFiles(List<string> lstPath)
         {
-            
-            string sJSON = System.IO.File.ReadAllText(sPath);
-            middleObjects = NTier.myAssembly2.getObjectFromJSONString<middleware.clsMiddleWareObjects>(sJSON);
 
-            var obj = Newtonsoft.Json.Linq.JObject.Parse(sJSON);
+            foreach (string sPath in lstPath)
+            {
+                
+                string sJSON = System.IO.File.ReadAllText(sPath);
+                var _middleObjects = oJSONParser.getJSONObject(sJSON,typeof(clsMiddleWareObjects)) as clsMiddleWareObjects;
+
+                if (middleObjects == null)
+                {
+                    middleObjects = _middleObjects;
+                    return;
+                }
 
 
+                
+
+                foreach (var obj in _middleObjects.dbConnections)
+                {
+                    middleObjects.dbConnections.Add(obj);
+                }
+
+
+                foreach (var obj in _middleObjects.objectTypes)
+                {
+                    middleObjects.objectTypes.Add(obj);
+                }
+
+
+                foreach (var obj in _middleObjects.tables)
+                {
+                    middleObjects.tables.Add(obj);
+                }
+
+            }
         }
 
         public NTier.adapter.clsDataAdapterBase getAdapter(string sConnectionName = "main")
@@ -49,6 +77,7 @@ namespace middleware
 
         public void compile()
         {
+
             foreach (var f in middleObjects.tables)
             {
 
@@ -56,7 +85,7 @@ namespace middleware
                 var objGet = new crud.clsGetData();
                 objGet.setAppService(this);
 
-                var sTable = f.viewName.isEmpty() ? f.name : f.viewName;
+                var sTable = f.view.isEmpty() ? f.name : f.view;
                 objGet.sql = "select * from " + sTable + " where 1=1";
                 objGet.path = f.name + "/get";
 
@@ -69,7 +98,7 @@ namespace middleware
 
                 objSave.Table = f.name;
 
-                if (f.primaryKeyFields != null && f.primaryKeyFields.Length > 0)
+                if (f.primaryKeyFields != null && f.primaryKeyFields.Count > 0)
                 {
                     objSave.idField = f.primaryKeyFields[0];
                     if (objSave.idField == f.autoIncrementField) objSave.isIdentity = true;
@@ -81,7 +110,7 @@ namespace middleware
                 var objDelete = new crud.clsTableDelete();
                 objDelete.setAppService(this);
                 objDelete.Table = f.name;
-                if (f.primaryKeyFields != null && f.primaryKeyFields.Length > 0)
+                if (f.primaryKeyFields != null && f.primaryKeyFields.Count > 0)
                 {
                     objDelete.idField = f.primaryKeyFields[0];
                     if (objDelete.idField == f.autoIncrementField) objDelete.isIdentity = true;
@@ -91,7 +120,7 @@ namespace middleware
                 //////////////////////////////////////////////////////////////
                 //DRP
 
-                if (f.displayFields.Length > 0 && f.primaryKeyFields.Length > 0)
+                if (f.displayFields.Count > 0 && f.primaryKeyFields.Count > 0)
                 {
                     string sDisplayField, sIDField;
 
