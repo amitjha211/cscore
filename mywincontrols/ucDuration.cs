@@ -23,7 +23,6 @@ namespace MyWinControls
 
         public string getEndDate()
         {
-
             return dtpStart.Value.ToString("dd/MMM/yyyy");
         }
     }

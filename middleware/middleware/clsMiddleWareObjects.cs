@@ -29,6 +29,7 @@ namespace middleware
         public List<clsObjectType> objectTypes;
         public List<clsConnectionInfo> dbConnections;
         public List<clsTable> tables;
+        public List<clsView> views;
         public List<clsCustomModule> customModules;
     }
 

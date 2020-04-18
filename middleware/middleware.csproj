@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{63CE9978-7CDE-4CEE-B9AD-3D0F300D1A76}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>middleware</RootNamespace>
+    <AssemblyName>middleware</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GvS.Controls.HtmlTextbox">
+      <HintPath>..\..\libs\GvS.Controls.HtmlTextbox.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\libs\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="middleware.win\Binder\Binder.cs" />
+    <Compile Include="middleware.win\Binder\BinderCheckbox.cs" />
+    <Compile Include="middleware.win\Binder\BinderDatePicker.cs" />
+    <Compile Include="middleware.win\Binder\BinderDropDown.cs" />
+    <Compile Include="middleware.win\Binder\BinderFieldBase.cs" />
+    <Compile Include="middleware.win\Binder\BinderText.cs" />
+    <Compile Include="middleware.win\clsForms.cs" />
+    <Compile Include="middleware.win\clsGrid.cs" />
+    <Compile Include="middleware.win\clsGridCol.cs" />
+    <Compile Include="middleware.win\clsMiddlewareUI.cs" />
+    <Compile Include="middleware.win\Extensions.cs" />
+    <Compile Include="middleware.win\frmBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="middleware.win\frmBase.Designer.cs">
+      <DependentUpon>frmBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="middleware.win\frmBaseEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="middleware.win\frmBaseEntry.Designer.cs">
+      <DependentUpon>frmBaseEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="middleware.win\frmGrid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="middleware.win\frmGrid.Designer.cs">
+      <DependentUpon>frmGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="middleware.win\frmGridSelectMultiple.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="middleware.win\frmGridSelectMultiple.Designer.cs">
+      <DependentUpon>frmGridSelectMultiple.cs</DependentUpon>
+    </Compile>
+    <Compile Include="middleware.win\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="middleware.win\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="middleware.win\frmMainTree.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="middleware.win\frmMainTree.designer.cs">
+      <DependentUpon>frmMainTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="middleware\appServiceBackup\clsAppService2.cs" />
+    <Compile Include="middleware\clsAPIResult.cs" />
+    <Compile Include="middleware\appServiceBackup\clsAppService.cs" />
+    <Compile Include="middleware\clsAppService2.cs" />
+    <Compile Include="middleware\clsCallObject.cs" />
+    <Compile Include="middleware\clsJSONParser.cs" />
+    <Compile Include="middleware\clsMiddleWareObjects.cs" />
+    <Compile Include="middleware\clsObjectBase.cs" />
+    <Compile Include="middleware\clsTest.cs" />
+    <Compile Include="middleware\crud\clsCustomModule.cs" />
+    <Compile Include="middleware\crud\clsGetData.cs" />
+    <Compile Include="middleware\crud\clsTableDelete.cs" />
+    <Compile Include="middleware\crud\clsTableSave.cs" />
+    <Compile Include="middleware\db\clsDB.cs" />
+    <Compile Include="middleware\db\clsTable.cs" />
+    <Compile Include="middleware\ds\clsDS.cs" />
+    <Compile Include="middleware\validations\basic.cs" />
+    <Compile Include="middleware\validations\vField.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="middleware.win\frmBase.resx">
+      <DependentUpon>frmBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="middleware.win\frmBaseEntry.resx">
+      <DependentUpon>frmBaseEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="middleware.win\frmGrid.resx">
+      <DependentUpon>frmGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="middleware.win\frmGridSelectMultiple.resx">
+      <DependentUpon>frmGridSelectMultiple.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="middleware.win\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="middleware.win\frmMainTree.resx">
+      <DependentUpon>frmMainTree.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dal\DAL.csproj">
+      <Project>{441F61A9-F898-4749-A1A7-B72EB6C1A771}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ntier\NTier_Web.csproj">
+      <Project>{93A0DC0E-8B0E-4040-980B-EFCF91C336B0}</Project>
+      <Name>NTier_Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\winui\winui.csproj">
+      <Project>{D96347CB-C8EA-4D20-BDDA-98473036A07F}</Project>
+      <Name>winui</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

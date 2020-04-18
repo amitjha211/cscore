@@ -7,7 +7,7 @@ using middleware.db;
 namespace middleware
 {
 
-    public class clsAppService2 : iAppService
+    public class clsAppService2_old : iAppService
     {
 
         private List<clsCallObjects> lstRequest = new List<clsCallObjects>();

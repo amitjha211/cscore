@@ -6,6 +6,7 @@ using System.Data;
 using System.Windows.Forms;
 using NTier.Request;
 using winui;
+
 namespace System
 {
     public class ui
@@ -67,6 +68,7 @@ namespace System
         {
             oForms.setMainForm(frmMain);
         }
+
 
 
         public static searchResult showSearchBox(DataTable t, string strTitle = "Search", DAL.GridColumns cols = null)
