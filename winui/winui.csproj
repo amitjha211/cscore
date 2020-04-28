@@ -36,13 +36,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\libs\Common.dll</HintPath>
-    </Reference>
-    <Reference Include="GvS.Controls.HtmlTextbox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\libs\GvS.Controls.HtmlTextbox.dll</HintPath>
+    <Reference Include="GvS.Controls.HtmlTextbox">
+      <HintPath>..\..\lib\GvS.Controls.HtmlTextbox.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -88,7 +83,6 @@
     <Compile Include="Binder\BinderDatePicker.cs" />
     <Compile Include="Binder\BinderDropDown.cs" />
     <Compile Include="Binder\BinderFieldBase.cs" />
-    <Compile Include="Binder\BinderHtmlEditor.cs" />
     <Compile Include="Binder\BinderText.cs" />
     <Compile Include="Binder\FileBinder.cs" />
     <Compile Include="clsFormNavigatorFromXml.cs" />
@@ -146,12 +140,6 @@
     </Compile>
     <Compile Include="frmRPT_Viewer.designer.cs">
       <DependentUpon>frmRPT_Viewer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmSearchBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmSearchBox.Designer.cs">
-      <DependentUpon>frmSearchBox.cs</DependentUpon>
     </Compile>
     <Compile Include="iFormFactory.cs" />
     <Compile Include="iFormNavigator.cs" />
@@ -224,9 +212,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRPT_Viewer.resx">
       <DependentUpon>frmRPT_Viewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmSearchBox.resx">
-      <DependentUpon>frmSearchBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TreeDesigner\frmImageList.resx">
       <DependentUpon>frmImageList.cs</DependentUpon>

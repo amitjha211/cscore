@@ -62,12 +62,12 @@ namespace winui
         }
 
         //GvS.Controls.HtmlTextbox 
-        public BinderHtmlEditor add(GvS.Controls.HtmlTextbox dtp, string sField)
-        {
-            var binder_Html = new BinderHtmlEditor(dtp, sField);
-            this.Add(binder_Html);
-            return binder_Html;
-        }
+        //public BinderHtmlEditor add(GvS.Controls.HtmlTextbox dtp, string sField)
+        //{
+        //    var binder_Html = new BinderHtmlEditor(dtp, sField);
+        //    this.Add(binder_Html);
+        //    return binder_Html;
+        //}
 
         public void setValue(DataRow r)
         {
@@ -109,13 +109,13 @@ namespace winui
                 }
 
                 //////////////////////////////////////////////
-                if (c is TextBox || c is ComboBox || c is DateTimePicker || c is CheckBox || c is GvS.Controls.HtmlTextbox)
+                if (c is TextBox || c is ComboBox || c is DateTimePicker || c is CheckBox )
                 {
                     string sFieldName = "";
 
                     if (c is TextBox || c is ComboBox)
                         sFieldName = c.Text;
-                    else if (c is DateTimePicker || c is CheckBox || c is GvS.Controls.HtmlTextbox)
+                    else if (c is DateTimePicker || c is CheckBox )
                         if (c.Tag != null) sFieldName = c.Tag.ToString();
 
                     sFieldName = sFieldName.Replace("{", "");
@@ -134,9 +134,7 @@ namespace winui
                         add(c as CheckBox, sFieldName);
                     if (c is DateTimePicker)
                         add(c as DateTimePicker, sFieldName);
-                    if (c is GvS.Controls.HtmlTextbox)
-                        add(c as GvS.Controls.HtmlTextbox, sFieldName);
-
+                    
 
                 }
 

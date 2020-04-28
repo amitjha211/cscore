@@ -39,7 +39,7 @@ namespace System
 
         public static string inputBox(string sTitle, string sDefaultVal = "")
         {
-            return Common.DB.Windows.g.inputBox(sTitle, sDefaultVal);
+            return "";//Common.DB.Windows.g.inputBox(sTitle, sDefaultVal);
         }
 
 
@@ -73,8 +73,9 @@ namespace System
 
         public static searchResult showSearchBox(DataTable t, string strTitle = "Search", DAL.GridColumns cols = null)
         {
-            
 
+            return null;
+            /*
             var frm1 = new frmSearchBox();
             frm1.Text = strTitle;
 
@@ -95,6 +96,7 @@ namespace System
             frm1.Dispose();
 
             return result;
+             */
         }
 
 

@@ -68,6 +68,20 @@ namespace NTier.CRUD
             return tEmpty;
         }
 
+        public void bulkUpload(DataTable t)
+        {
+
+            string q = getInsertCommand2(t);
+
+            foreach (DataRow r in t.Rows)
+            {
+                clsCmd cmd2 = new clsCmd();
+                cmd2.SQL = q;
+                cmd2.AddValues(r);
+                _adapter.exec(cmd2);
+            }
+        }
+
         public clsMsg save(clsCmd cmd)
         {
 
@@ -75,7 +89,6 @@ namespace NTier.CRUD
 
             var t = getEmptyTable();
             var cmd2 = getSaveCommand(t, cmd);
-
 
             try
             {
@@ -87,7 +100,12 @@ namespace NTier.CRUD
                         break;
                     case "sqlite":
                         _adapter.exec(cmd2);
-                        if (sSaveFlag == "insert") obj = _adapter.execScalar("SELECT last_insert_rowid()");
+                        
+                        if (sSaveFlag == "insert")
+                            obj = _adapter.execScalar("SELECT last_insert_rowid()");
+                        else
+                            obj = cmd.getIntValue(PrimaryKeyField);
+
                         break;
                 }
 

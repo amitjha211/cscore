@@ -67,7 +67,7 @@ namespace NTier.sqlbuilder
             int i = 0;
             StringBuilder sb1 = new StringBuilder();
 
-            if (isIdentity == false)
+            if (isIdentity == false && databaseType == "mssql")
             {
                 sb1.AppendLine("declare @id int ");
                 sb1.AppendFormat("set @id  = (select isnull(max({0}),0) + 1 from {1}) \n\r ", PrimaryKeyField, TableName);
@@ -174,6 +174,36 @@ namespace NTier.sqlbuilder
 
 
 
+
+
+        public string getInsertCommand2(DataTable t)
+        {
+
+            List<string> lstCols = new List<string>();
+            List<string> lstCols2 = new List<string>();
+
+            foreach (DataColumn col in t.Columns)
+            {
+                lstCols.Add(col.ColumnName);
+                lstCols2.Add("@" + col.ColumnName);
+            }
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendFormat("insert into {0} ", TableName);
+            sb.AppendLine("(");
+            sb.AppendFormat(string.Join(",",lstCols.ToArray()));
+            sb.AppendLine(")");
+
+            sb.AppendLine(" values(");
+            sb.AppendFormat(string.Join(",", lstCols2.ToArray()));
+            sb.AppendLine(")");
+            
+            return sb.ToString();
+            
+        }
+
+
         public clsCmd getUpdateCommand(DataTable t
             , clsCmd cmd)
         {
@@ -217,8 +247,8 @@ namespace NTier.sqlbuilder
             }
 
             sb1.AppendFormat(" where {0} = {1} \n\r", PrimaryKeyField, iID);
-            
-            if(databaseType=="mssql") sb1.AppendFormat("select {0}", iID);
+
+            if (databaseType == "mssql") sb1.AppendFormat("select {0}", iID);
 
             cmd2.SQL = sb1.ToString();
 
