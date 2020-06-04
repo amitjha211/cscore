@@ -31,6 +31,7 @@ namespace middleware
         public List<clsTable> tables;
         public List<clsView> views;
         public List<clsCustomModule> customModules;
+        public List<ssrs.clsReport> sqlReports;
     }
 
 

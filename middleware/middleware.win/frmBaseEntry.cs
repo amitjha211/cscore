@@ -16,7 +16,7 @@ namespace middleware.win
         {
             InitializeComponent();
         }
-        
+
 
         public Action<string, object> formCommand;
 
@@ -26,27 +26,30 @@ namespace middleware.win
 
         }
         protected object callingObject;
-        
-        public void fillDropDown(string sDataPath
-            , ListControl drp1)
+
+        public void fillDropDown(ListControl drp1, string sDataPath, string sDisplayMember = "", string sValueMember = "")
+        {
+            fillDropDown(drp1, sDataPath, new clsCmd(), sDisplayMember, sValueMember);
+        }
+        public void fillDropDown(ListControl drp1, string sDataPath, clsCmd cmd, string sDisplayMember = "", string sValueMember = "")
         {
 
 
-            var _response = appService.call(sDataPath, new clsCmd());
+            var _response = appService.call(sDataPath, cmd);
             if (_response.isValid)
             {
 
                 DataTable t = _response.result as DataTable;
 
-                drp1.DisplayMember = t.Columns[0].ColumnName;
-                drp1.ValueMember = t.Columns[t.Columns.Count - 1].ColumnName;
+                drp1.DisplayMember = sDisplayMember.isEmpty() ? t.Columns[0].ColumnName : sDisplayMember;
+                drp1.ValueMember = sValueMember.isEmpty() ? t.Columns[t.Columns.Count - 1].ColumnName : sValueMember;
                 drp1.DataSource = t;
             }
         }
 
 
 
-        protected void setGridDelete(System.Windows.Forms.DataGridView grd, string sDeleteCommandPath,string sPrimaryKeyField)
+        protected void setGridDelete(System.Windows.Forms.DataGridView grd, string sDeleteCommandPath, string sPrimaryKeyField)
         {
 
             grd.KeyDown += delegate(object sender, KeyEventArgs e)
@@ -55,7 +58,7 @@ namespace middleware.win
                 if (e.Control == true && e.KeyCode == Keys.Delete)
                 {
 
-                    deleteRow(grd, sDeleteCommandPath,sPrimaryKeyField);
+                    deleteRow(grd, sDeleteCommandPath, sPrimaryKeyField);
                 }
 
             };

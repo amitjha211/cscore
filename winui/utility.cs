@@ -71,7 +71,8 @@ namespace winui
             return null;
         }
 
-        public static void OpenReport(string sTitle, NTier.sqlReport.SQLReportBase rpt)
+        public static void OpenReport(string sTitle
+            , NTier.sqlReport.SQLReportBase rpt)
         {
             var frm1 = new frmRPT_Viewer();
             frm1.Text = sTitle;

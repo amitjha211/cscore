@@ -22,10 +22,7 @@ namespace middleware.Validations
         public override clsAPIResponse call(clsCmd cmd)
         {
 
-            if (this.field == "category")
-            {
-                Console.WriteLine("");
-            }
+           
 
             StringBuilder sbMsg = new StringBuilder();
 

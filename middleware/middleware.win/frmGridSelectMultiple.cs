@@ -178,6 +178,24 @@ namespace middleware.win
 
         }
 
+        private void frmGridSelectMultiple_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //if (e.KeyChar == (char)27)
+            //{
+            //    ui.alert("hi");
+            //}
+        }
+
+        private void frmGridSelectMultiple_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                //this.Dispose();
+            }
+
+        }
+
 
 
 

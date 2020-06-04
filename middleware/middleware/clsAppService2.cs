@@ -7,6 +7,13 @@ using middleware.db;
 namespace middleware
 {
 
+    public interface iAppService
+    {
+        string getAppSetting(string skey);
+        NTier.adapter.clsDataAdapterBase getAdapter(string sConnectionName = "main");
+        clsAPIResponse call(string sPath, clsCmd cmd);
+    }
+
     public class clsAppService2 : iAppService
     {
 
@@ -176,13 +183,13 @@ namespace middleware
 
         }
 
+
         public clsAPIResponse call(string sPath, clsCmd cmd)
         {
             var obj = lstRequest.Find(p => p.path == sPath);
             if (obj == null) return new clsAPIResponse() { message = string.Format("path [{0}] not found !", sPath) };
             return obj.call(cmd);
         }
-
 
         public string getAppSetting(string skey)
         {

@@ -19,3 +19,4 @@ D:\proj\cscore\middleware\obj\Debug\middleware.pdb
 D:\proj\cscore\middleware\obj\Debug\middleware.win.frmBase.resources
 D:\proj\cscore\middleware\bin\Debug\Newtonsoft.Json.dll
 D:\proj\cscore\middleware\bin\Debug\Newtonsoft.Json.xml
+D:\proj\cscore\middleware\obj\Debug\middleware.win.frmGrid1.resources

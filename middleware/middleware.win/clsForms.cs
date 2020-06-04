@@ -171,8 +171,8 @@ namespace middleware.win
                 frm2.appService = _appService;
                 frm2.formService = this;
             }
-
         }
+
         public void openForm(string path, clsCmd cmd)
         {
             var res = call(path, cmd);
@@ -182,6 +182,7 @@ namespace middleware.win
                 var frm = res.result as Form;
                 setProp(frm);
                 frm.Show();
+                frm.Activate();
             }
         }
 

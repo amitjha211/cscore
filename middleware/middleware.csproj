@@ -63,6 +63,12 @@
     <Compile Include="middleware.win\clsGrid.cs" />
     <Compile Include="middleware.win\clsGridCol.cs" />
     <Compile Include="middleware.win\clsMiddlewareUI.cs" />
+    <Compile Include="middleware.win\frmGrid1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="middleware.win\frmGrid1.Designer.cs">
+      <DependentUpon>frmGrid1.cs</DependentUpon>
+    </Compile>
     <Compile Include="middleware.win\Extensions.cs" />
     <Compile Include="middleware.win\frmBase.cs">
       <SubType>Form</SubType>
@@ -102,25 +108,26 @@
     </Compile>
     <Compile Include="middleware\appServiceBackup\clsAppService2.cs" />
     <Compile Include="middleware\clsAPIResult.cs" />
-    <Compile Include="middleware\appServiceBackup\clsAppService.cs" />
     <Compile Include="middleware\clsAppService2.cs" />
     <Compile Include="middleware\clsCallObject.cs" />
     <Compile Include="middleware\clsJSONParser.cs" />
     <Compile Include="middleware\clsMiddleWareObjects.cs" />
     <Compile Include="middleware\clsObjectBase.cs" />
     <Compile Include="middleware\clsTest.cs" />
-    <Compile Include="middleware\crud\clsCustomModule.cs" />
-    <Compile Include="middleware\crud\clsGetData.cs" />
-    <Compile Include="middleware\crud\clsTableDelete.cs" />
-    <Compile Include="middleware\crud\clsTableSave.cs" />
+    <Compile Include="middleware\crud\clsCustomModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="middleware\db\clsDB.cs" />
     <Compile Include="middleware\db\clsTable.cs" />
-    <Compile Include="middleware\ds\clsDS.cs" />
+    <Compile Include="middleware\ssrs\clsReport.cs" />
     <Compile Include="middleware\validations\basic.cs" />
     <Compile Include="middleware\validations\vField.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="middleware.win\frmGrid1.resx">
+      <DependentUpon>frmGrid1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="middleware.win\frmBase.resx">
       <DependentUpon>frmBase.cs</DependentUpon>
     </EmbeddedResource>
@@ -154,6 +161,7 @@
       <Name>winui</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

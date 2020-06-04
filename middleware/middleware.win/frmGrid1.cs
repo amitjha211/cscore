@@ -7,95 +7,92 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-
 namespace middleware.win
 {
 
-    public partial class frmGrid : frmBaseEntry
+    public partial class frmGrid1 : frmBaseEntry
     {
-        //public class clsGridSearch
-        //{
+        private class clsGridSearch
+        {
+            DataGridView _grd;
+            TextBox _txt;
+            ComboBox _drp;
+            BindingSource _bindingSource;
 
 
-        //    DataGridView _grd;
-        //    TextBox _txt;
-        //    ComboBox _drp;
-        //    BindingSource _bindingSource;
+            public DataTable getDataTable()
+            {
+                return _bindingSource.DataSource as DataTable;
+            }
+
+            public clsGridSearch(DataGridView grd
+                , TextBox txt
+                , ComboBox drp
+                , Button btnOK = null)
+            {
+
+                _grd = grd;
+                _txt = txt;
+                _drp = drp;
+
+                if (_grd.DataSource is BindingSource)
+                {
+                    _bindingSource = _grd.DataSource as BindingSource;
+                }
 
 
-        //    public DataTable getDataTable()
-        //    {
-        //        return _bindingSource.DataSource as DataTable;
-        //    }
+                DataTable tDrp = new DataTable();
 
-        //    public clsGridSearch(DataGridView grd
-        //        , TextBox txt
-        //        , ComboBox drp
-        //        , Button btnOK = null)
-        //    {
+                tDrp.Columns.Add("title", typeof(string));
+                tDrp.Columns.Add("field", typeof(string));
 
-        //        _grd = grd;
-        //        _txt = txt;
-        //        _drp = drp;
+                foreach (DataGridViewColumn gridcol in _grd.Columns)
+                {
 
-        //        if (_grd.DataSource is BindingSource)
-        //        {
-        //            _bindingSource = _grd.DataSource as BindingSource;
-        //        }
+                    var r = tDrp.NewRow();
 
+                    r["title"] = gridcol.HeaderText;
+                    r["field"] = gridcol.DataPropertyName;
 
-        //        DataTable tDrp = new DataTable();
+                    tDrp.Rows.Add(r);
+                }
 
-        //        tDrp.Columns.Add("title", typeof(string));
-        //        tDrp.Columns.Add("field", typeof(string));
+                _drp.ValueMember = "field";
+                _drp.DisplayMember = "title";
+                _drp.DataSource = tDrp;
 
-        //        foreach (DataGridViewColumn gridcol in _grd.Columns)
-        //        {
-
-        //            var r = tDrp.NewRow();
-
-        //            r["title"] = gridcol.HeaderText;
-        //            r["field"] = gridcol.DataPropertyName;
-
-        //            tDrp.Rows.Add(r);
-        //        }
-
-        //        _drp.ValueMember = "field";
-        //        _drp.DisplayMember = "title";
-        //        _drp.DataSource = tDrp;
-
-        //        _drp.SelectedIndex = 0;
+                _drp.SelectedIndex = 0;
 
 
-        //        _txt.TextChanged += new EventHandler(_txt_TextChanged);
+                _txt.TextChanged += new EventHandler(_txt_TextChanged);
 
-        //    }
+            }
 
-        //    void _txt_TextChanged(object sender, EventArgs e)
-        //    {
-        //        string sField = _drp.SelectedValue.ToString();
-        //        string sValue = _txt.Text;
+            void _txt_TextChanged(object sender, EventArgs e)
+            {
+                string sField = _drp.SelectedValue.ToString();
+                string sValue = _txt.Text;
 
-        //        if (sField.isEmpty()) return;
+                if (sField.isEmpty()) return;
 
-        //        if (_txt.Text.isEmpty())
-        //        {
-        //            _bindingSource.Filter = "";
-        //        }
-        //        else
-        //            _bindingSource.Filter = string.Format("{0} Like '{1}%'", _drp.SelectedValue.ToString(), _txt.Text);
+                if (_txt.Text.isEmpty())
+                {
+                    _bindingSource.Filter = "";
+                }
+                else
+                    _bindingSource.Filter = string.Format("{0} Like '{1}%'", _drp.SelectedValue.ToString(), _txt.Text);
 
-        //    }
+            }
 
-        //}
+        }
 
-        public frmGrid()
+        public frmGrid1()
         {
             InitializeComponent();
         }
 
         public clsGrid gridInfo { get; set; }
-        
+        private clsGridSearch _grdSrc;
 
         public void compile()
         {
@@ -108,9 +105,7 @@ namespace middleware.win
                 this.Text = gridInfo.title;
                 lblTitle.Text = gridInfo.title;
                 gridInfo.bindGrid(this.dataGridView1, new clsCmd());
-                
-
-                dataGridView1.setFilter(txtSrc, drpSrcField);
+                _grdSrc = new clsGridSearch(dataGridView1, txtSrc, drpSrcField);
             }
 
 
@@ -176,7 +171,7 @@ namespace middleware.win
         private void btnSave_Click(object sender, EventArgs e)
         {
 
-            DataTable t = dataGridView1.getDataTable().GetChanges();
+            DataTable t = _grdSrc.getDataTable().GetChanges();
 
             if (t == null)
             {
@@ -238,7 +233,7 @@ namespace middleware.win
         private void btnAddNew_Click(object sender, EventArgs e)
         {
 
-            DataRow r = dataGridView1.getDataTable().NewRow();
+            DataRow r = _grdSrc.getDataTable().NewRow();
             formService.openFormEntryDialog(gridInfo.editForm, r);
         }
 

@@ -7,13 +7,7 @@ using middleware.db;
 namespace middleware
 {
 
-    public interface iAppService
-    {
-        string getAppSetting(string skey);
-        NTier.adapter.clsDataAdapterBase getAdapter(string sConnectionName = "main");
-        clsAPIResponse call(string sPath, clsCmd cmd);
-    }
-
+   
     public class clsAppService_old : iAppService
     {
 
