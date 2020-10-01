@@ -7,6 +7,8 @@ using System.Data;
 using System.Data.SQLite;
 namespace NTier.adapter
 {
+
+
     public class clsSQLiteAdapter : clsDataAdapterBase
     {
         string _connectionString = "";

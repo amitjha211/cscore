@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{93A0DC0E-8B0E-4040-980B-EFCF91C336B0}</ProjectGuid>
+    <ProjectGuid>{67DCDEA8-DC69-465A-A671-8A91CF8FF7A8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NTier</RootNamespace>
-    <AssemblyName>NTier_Web</AssemblyName>
+    <AssemblyName>NTier_Web_SQLLite</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -23,7 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
     </DocumentationFile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -53,15 +53,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\libs\sqlReport\Microsoft.ReportViewer.WebForms.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\nuget_libs\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\nuget_libs\Newtonsoft.Json.12.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
       <HintPath>..\..\nuget_libs\NPOI.2.5.1\lib\net40\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\System.Data.SQLite\2010\bin\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
@@ -74,9 +77,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="adapter\clsAdapterBase.cs" />
+    <Compile Include="adapter\clsSQLiteAdapter.cs" />
     <Compile Include="adapter\iAdapter.cs" />
     <Compile Include="adapter\utility.cs" />
-    <Compile Include="adapter\utility_ext.cs" />
+    <Compile Include="adapter\utility_sqlite_ext.cs" />
     <Compile Include="clsAppServer.cs" />
     <Compile Include="myAssembly2.cs" />
     <Compile Include="Request\clsBussinessTier2Base.cs" />
