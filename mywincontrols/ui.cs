@@ -184,6 +184,8 @@ namespace MyWinControls
 
         public static string inputBox(string sTitle, string sDefaultVal = "")
         {
+
+            throw new Exception("Not implemented!");
             return Common.DB.Windows.g.inputBox(sTitle, sDefaultVal);
         }
 

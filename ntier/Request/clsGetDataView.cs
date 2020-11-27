@@ -66,7 +66,7 @@ namespace NTier.Request
 
 
             string q = "select * from " + viewName + " where 1=1 ";
-            cmd.SQL = NTier.sqlbuilder.sqlUtility.joinWhereCondition(q, cmd);
+            cmd.SQL = NTier.sqlbuilder.sqlUtility.joinWhereCondition(q, cmd,"_filter");
 
             add_json_filter(cmd);
 

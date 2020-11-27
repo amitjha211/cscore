@@ -12,11 +12,13 @@ namespace NTier.adapter
     public partial class utility
     {
 
-
+        
 
         public static clsDataAdapterBase createAdapter(string sConnectionType, string sConnectionString)
         {
 
+            
+            
             clsDataAdapterBase _adapter = null;
             switch (sConnectionType.ToLower())
             {
@@ -24,8 +26,9 @@ namespace NTier.adapter
                     _adapter = new clsMSSQLAdapter(sConnectionString);
                     return _adapter;
                 case "sqlite":
-                    _adapter = getSQLLiteAdapter(sConnectionString);
-                    return _adapter;
+                    _adapter = Activator.CreateInstance("Billing", "Billing.clsSQLiteAdapter").Unwrap() as clsDataAdapterBase;
+                    _adapter.connectionString = sConnectionString;
+                    return _adapter; 
                 case "mysql":
                 case "access":
                     throw new Exception("Not implemented !");

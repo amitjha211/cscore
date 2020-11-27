@@ -9,10 +9,12 @@ namespace NTier.adapter
 {
     internal class clsMSSQLAdapter : clsDataAdapterBase
     {
-        string _connectionString = "";
+
+        
+        
         public clsMSSQLAdapter(string sConnectionString)
         {
-            _connectionString = sConnectionString;
+            connectionString = sConnectionString;
         }
 
         public override string databaseType
@@ -22,7 +24,7 @@ namespace NTier.adapter
         
         public override void exec(clsCmd cmd)
         {
-            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
                 var sqlcmd = conn.CreateCommand();
@@ -36,7 +38,7 @@ namespace NTier.adapter
 
         public override DataTable getData(clsCmd cmd)
         {
-            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 var sqlcmd = conn.CreateCommand();
                 utility.setCommand(cmd, sqlcmd);
@@ -52,7 +54,7 @@ namespace NTier.adapter
 
         public override object execScalar(clsCmd cmd)
         {
-            using (SqlConnection conn = new SqlConnection(_connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
                 var sqlcmd = conn.CreateCommand();

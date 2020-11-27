@@ -11,6 +11,7 @@ namespace NTier.adapter
     {
 
         public abstract string databaseType {get;}
+        
         public abstract void exec(clsCmd cmd);
         public abstract DataTable getData(clsCmd cmd);
         public abstract object execScalar(clsCmd cmd);
@@ -37,5 +38,18 @@ namespace NTier.adapter
             return getData(cmd);
         }
 
+
+        string _connectionString = "";
+        public string connectionString
+        {
+            get
+            {
+                return _connectionString;
+            }
+            set
+            {
+                _connectionString= value;
+            }
+        }
     }
 }
