@@ -66,10 +66,12 @@ namespace NTier.Request
 
 
             string q = "select * from " + viewName + " where 1=1 ";
-            cmd.SQL = NTier.sqlbuilder.sqlUtility.joinWhereCondition(q, cmd,"_filter");
-
+            
             add_json_filter(cmd);
 
+            cmd.SQL = NTier.sqlbuilder.sqlUtility.joinWhereCondition(q, cmd,"_filter");
+
+            
             if (!OrderBy.isEmpty()) cmd.SQL += " order by " + OrderBy;
 
             var t = _adapter.getData(cmd);

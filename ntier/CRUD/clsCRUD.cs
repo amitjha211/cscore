@@ -19,6 +19,7 @@ namespace NTier.CRUD
             : base(sTableName, sViewName, sPrimaryKey, blnIsIdentity, adapter.databaseType)
         {
             _adapter = adapter;
+            databaseType = _adapter.databaseType;
         }
 
 
@@ -47,6 +48,8 @@ namespace NTier.CRUD
                 _adapter.exec(cmd2);
             }
         }
+
+
 
 
         DataTable tEmpty = null;
@@ -100,7 +103,7 @@ namespace NTier.CRUD
                         break;
                     case "sqlite":
                         _adapter.exec(cmd2);
-                        
+
                         if (sSaveFlag == "insert")
                             obj = _adapter.execScalar("SELECT last_insert_rowid()");
                         else
@@ -124,6 +127,23 @@ namespace NTier.CRUD
             var iID = cmd.getIntValue("id");
             string q = "delete from " + TableName + " where " + " " + PrimaryKeyField + " = " + iID;
             _adapter.exec(q);
+        }
+
+        public clsMsg getData(clsCmd cmd)
+        {
+            var oViewData = new NTier.Request.clsGetDataView(this._adapter);
+            oViewData.viewName = this.ViewName;
+           
+            try
+            {
+                DataTable t = oViewData.getData(cmd);
+                return g.msg("", t);
+            }
+            catch (Exception ex)
+            {
+                return g.msg_exception(ex);
+            }
+
         }
 
     }

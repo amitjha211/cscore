@@ -78,6 +78,7 @@
     <Compile Include="adapter\utility.cs" />
     <Compile Include="clsAppServer.cs" />
     <Compile Include="myAssembly2.cs" />
+    <Compile Include="Request2\iBusinessTier.cs" />
     <Compile Include="Request\clsBussinessTier2Base.cs" />
     <Compile Include="Request\clsBussinessTier2Web.cs" />
     <Compile Include="Request\clsBussinessTierFromXmlBase.cs" />

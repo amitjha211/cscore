@@ -6,7 +6,7 @@ using System.Web;
 
 namespace NTier.Request
 {
-    class clsBussinessTier2Web : clsBussinessTier2Base
+    internal class clsBussinessTier2Web : clsBussinessTier2Base
     {
 
         public clsBussinessTier2Web(clsAppServerBase appServerInfo
@@ -17,6 +17,10 @@ namespace NTier.Request
 
         }
 
+        public clsBussinessTier2Web(clsAppServerConfigFiles configFiles)
+            : base(configFiles)
+        {
+        }
 
         public override void setCookie(string sKey, string sValue)
         {

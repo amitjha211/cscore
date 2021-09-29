@@ -38,7 +38,8 @@ namespace webui
         {
 
             XmlNodeList nodes = xDoc.SelectNodes("//menus/main");
-            return getAuthorzedNodeList(nodes);
+            var lst = getAuthorzedNodeList(nodes);
+            return lst;
         }
 
 

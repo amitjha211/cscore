@@ -22,12 +22,25 @@ namespace NTier.Request
             return obj;
         }
 
+        public static iBussinessTier createBussinessTierFromXmlForWeb2(clsAppServerConfigFiles configFiles)
+        {
+            clsBussinessTier2Web obj = new clsBussinessTier2Web(configFiles);
+            return obj;
+        }
+
 
         public static iBussinessTier createBussinessTierFromXmlForWin2(clsAppServerBase oAppServerInfo, string sMainApp)
         {
             iBussinessTier obj = new clsBussinessTier2Win(oAppServerInfo, sMainApp);
             return obj;
         }
+
+        public static iBussinessTier createBussinessTierFromXmlForWin2(clsAppServerConfigFiles configFiles)
+        {
+            iBussinessTier obj = new clsBussinessTier2Win(configFiles);
+            return obj;
+        }
+
 
 
         public static iBussinessTier createBussinessTierControllerFromXmlForWin2(clsAppServerBase oAppServerInfo, string sMainApp)

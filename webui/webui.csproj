@@ -31,16 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DAL">
-      <HintPath>..\..\output\dal\DAL.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\nuget_libs\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NTier_Web, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\output\ntier\NTier_Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -55,10 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bootstrap_ui.cs" />
     <Compile Include="checkLogin.cs" />
-    <Compile Include="clsMyUrl.cs" />
     <Compile Include="Controllers\tst.cs" />
+    <Compile Include="ServiceController3.cs" />
     <Compile Include="myController.cs" />
     <Compile Include="ServiceController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +60,16 @@
     <Compile Include="webUtil.cs" />
     <Compile Include="xmlMenu\xmlMenu.cs" />
     <Compile Include="xmlMenu\xmlMenuNode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dal\DAL.csproj">
+      <Project>{441f61a9-f898-4749-a1a7-b72eb6c1a771}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ntier\NTier_Web.csproj">
+      <Project>{93a0dc0e-8b0e-4040-980b-efcf91c336b0}</Project>
+      <Name>NTier_Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,11 +10,7 @@ namespace System
     public static class ui
     {
 
-        public static string getWebAppSettings(string sKey)
-        {
-
-            return Configuration.ConfigurationManager.AppSettings[sKey];
-        }
+       
 
         public static string appServicePath
         {

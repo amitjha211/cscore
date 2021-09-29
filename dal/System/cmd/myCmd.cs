@@ -52,6 +52,31 @@ namespace System
             return oFile;
 
         }
+        public FileData Add(string sField,string sPath)
+        {
+
+            FileData oFile = null;
+
+            if (System.IO.File.Exists(sPath))
+            {
+
+
+                oFile = new FileData();
+                oFile.ContentType = "application/unknown";
+                oFile.FieldName = sField; 
+                oFile.FileName = System.IO.Path.GetFileName(sPath);
+                oFile.FileExtension = System.IO.Path.GetExtension(sPath);
+                oFile.Data = System.IO.File.ReadAllBytes(sPath);
+
+
+                this.Add(oFile);
+            }
+
+
+            return oFile;
+
+        }
+
         public FileData Add(string sPath)
         {
 
@@ -66,7 +91,7 @@ namespace System
                 oFile.FileName = System.IO.Path.GetFileName(sPath);
                 oFile.FileExtension = System.IO.Path.GetExtension(sPath);
                 oFile.Data = System.IO.File.ReadAllBytes(sPath);
-
+                
 
                 this.Add(oFile);
             }

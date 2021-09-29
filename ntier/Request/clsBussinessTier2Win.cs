@@ -6,7 +6,8 @@ using System.Web;
 
 namespace NTier.Request
 {
-    class clsBussinessTier2Win : clsBussinessTier2Base
+    
+    internal class clsBussinessTier2Win : clsBussinessTier2Base
     {
         System.Collections.Specialized.NameValueCollection clnCookie = new System.Collections.Specialized.NameValueCollection();
         public clsBussinessTier2Win(clsAppServerBase appServerInfo
@@ -15,12 +16,15 @@ namespace NTier.Request
         {
         }
 
+        public clsBussinessTier2Win(clsAppServerConfigFiles configFiles)
+            : base(configFiles)
+        {
+
+        }
+
         public override void setCookie(string sKey, string sValue)
         {
             clnCookie.Set(sKey, sValue);
-            HttpCookie myUserCookie = new HttpCookie(sKey);
-            myUserCookie.Value = sValue;
-            HttpContext.Current.Response.Cookies.Add(myUserCookie);
         }
 
         public override string getCookie(string sKey)

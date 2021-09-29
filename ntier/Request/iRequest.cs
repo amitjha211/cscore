@@ -187,15 +187,11 @@ namespace NTier.Request
         }
     }
 
-
-
-
     internal abstract class clsRequestFileData_Base : clsRequest
     {
         public abstract override clsMsg validate(clsCmd cmd);
         public abstract clsMsg getFileData(clsCmd cmd);
     }
-
 
     internal class clsRequestFileData_Assembly : clsRequestFileData_Base
     {
@@ -241,7 +237,6 @@ namespace NTier.Request
 
             var msg = validate(cmd);
             if (msg.Validated == false) return msg;
-
 
             var oCRUD = _tier.getCRUD(this.crudName);
 

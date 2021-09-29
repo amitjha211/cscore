@@ -8,10 +8,10 @@ using DAL;
 namespace NTier.Request
 {
 
-
     public interface iRoleAccess
     {
-        bool isAuthorized(string sModuleName, string sActionName);
+        bool isAuthorized(string moduleName,string ActionName);
+        bool isAuthorized(string right_full_path);
     }
 
     public interface iBussinessTier

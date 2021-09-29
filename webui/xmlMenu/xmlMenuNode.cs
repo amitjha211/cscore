@@ -59,19 +59,7 @@ namespace webui
         {
             if (sAccess.isEmpty()) return true;
 
-            string sModuleName = "";
-            string sActionName = "";
-
-
-            string[] sAccess_array = sAccess.Split('\\');
-
-            if (sAccess_array.Length == 0) return true;
-
-            if (sAccess_array.Length > 0) sModuleName = sAccess_array[0];
-            if (sAccess_array.Length > 1) sActionName = sAccess_array[1];
-
-
-            return _role.isAuthorized(sModuleName, sActionName);
+            return _role.isAuthorized(sAccess);
 
         }
 

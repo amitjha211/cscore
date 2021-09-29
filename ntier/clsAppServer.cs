@@ -7,12 +7,13 @@ namespace NTier
 {
 
 
+
     public abstract class clsAppServerBase
     {
 
         public abstract string appServerRootPath { get; }
         public abstract string appName { get; }
-        
+
 
         public string getAppConfigFilePath()
         {
@@ -57,6 +58,22 @@ namespace NTier
         public override string appServerRootPath
         {
             get { return _AppServerRootPath; }
+        }
+    }
+
+
+    public class clsAppServerConfigFile
+    {
+        public string keyAttr { get; set; }
+        public string path { get; set; }
+    }
+
+    public class clsAppServerConfigFiles : List<clsAppServerConfigFile>
+    {
+        public void Add(string sKeyAttri, string sPath)
+        {
+            var obj = new clsAppServerConfigFile() {  path=sPath,keyAttr=sKeyAttri};
+            base.Add(obj);
         }
     }
 

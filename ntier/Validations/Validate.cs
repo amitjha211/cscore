@@ -84,7 +84,7 @@ namespace NTier.Validations
             , string sFieldTitle
             , bool required)
         {
-            var f = new validateDuplicate(adapter,sTableName,sPrimaryKeyField,sField) { FieldName = sField, FieldTitle = sFieldTitle, Required = required};
+            var f = new validateDuplicate(adapter,sTableName,sPrimaryKeyField,sField.Split(',')) { FieldName = sField, FieldTitle = sFieldTitle, Required = required};
             this.Add(f);
             
         }

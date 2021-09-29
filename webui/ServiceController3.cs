@@ -10,45 +10,8 @@ using System.Web;
 
 namespace webui
 {
-    public abstract class ServiceControllerBase : myController
+    public abstract class ServiceController3 : myController
     {
-
-        public abstract string AppServerRootPath { get; }
-        public abstract string AppName { get; }
-
-
-
-        Dictionary<string, NTier.Request.iBussinessTier> clnTier = new Dictionary<string, NTier.Request.iBussinessTier>();
-
-        NTier.Request.iBussinessTier __tier;
-
-        protected NTier.Request.iBussinessTier _tier
-        {
-            get
-            {
-                if (__tier == null)
-                {
-                    __tier = NTier.Request.utility.createBussinessTierFromXmlForWeb2(new NTier.clsAppServerInfo(AppServerRootPath, AppName), AppName);
-                }
-
-                return __tier;
-            }
-        }
-
-        protected NTier.Request.iBussinessTier getTier(string sOtherLibApp)
-        {
-            if (!clnTier.ContainsKey(sOtherLibApp))
-            {
-                clnTier.Add(sOtherLibApp, NTier.Request.utility.createBussinessTierFromXmlForWeb2(new NTier.clsAppServerInfo(AppServerRootPath, sOtherLibApp), AppName));
-            }
-            return clnTier[sOtherLibApp];
-        }
-
-
-
-
-        
-
 
         int _start = 0;
         int _length = 10;
@@ -95,70 +58,42 @@ namespace webui
         }
 
 
-        private class clsRequestInfo
-        {
-            public string appName { get; set; }
-            public string Path { get; set; }
-
-            public clsRequestInfo(string DefaultAppName
-                , string sPath)
-            {
-                if (sPath.Contains(":"))
-                {
-                    string[] sSplittedValues = sPath.Split(':');
-                    appName = sSplittedValues[0];
-                    Path = sSplittedValues[1];
-                }
-                else
-                {
-                    appName = DefaultAppName;
-                    Path = sPath;
-                }
-            }
-        }
-
-        private clsRequestInfo getRequestPathInfo(string sPath)
-        {
-            var oRequestPathInfo = new clsRequestInfo(AppName, sPath);
-            return oRequestPathInfo;
-        }
 
         public ContentResult getdataAll(FormCollection frm)
         {
 
+
+            System.Threading.Thread.Sleep(300);
+
             var cmd = new clsCmd();
             webUtil.addParamFromPost(cmd, frm);
 
-            string spath = Request.QueryString["path"];
-            clsRequestInfo oRequestInfo = getRequestPathInfo(spath);
+            string sPath = Request.QueryString["path"];
+
 
             DataTable t = null;
             clsMsg result;
 
-            if (oRequestInfo.Path.StartsWith("drp\\"))
-            {
-                result = getTier(oRequestInfo.appName).getDropDownData(oRequestInfo.Path.Substring(4), cmd);
-            }
-            else
-            {
-                result = getTier(oRequestInfo.appName).getData(oRequestInfo.Path, cmd);
-            }
+            result = webUtil.tier.getData(sPath, cmd);
 
 
             t = result.Obj as DataTable;
+
             return Content(Newtonsoft.Json.JsonConvert.SerializeObject(t), "application/json");
         }
 
 
-     
+
 
         public ContentResult getdataPaging(FormCollection frm)
         {
+            System.Threading.Thread.Sleep(300);
+
+
             var cmd = new clsCmd();
             webUtil.addParamFromPost(cmd, frm);
             string sPath = Request.QueryString["path"];
 
-            clsRequestInfo oRequestInfo = getRequestPathInfo(sPath);
 
             string sSortType = cmd.getStringValue("$sort");
             if (cmd.ContainFields("$sort"))
@@ -166,13 +101,13 @@ namespace webui
                 cmd.Remove(cmd["$sort"]);
             }
 
-            var result = getTier(oRequestInfo.appName).getData(oRequestInfo.Path, cmd);
+            var result = webUtil.tier.getData(sPath, cmd);
 
             if (result.Validated)
             {
-                //var t = _tier.getData(sPath, cmd).Obj as DataTable;
                 DataTable t = result.Obj as DataTable;
                 var tPaging = g.getJsonPaging(t, sSortType, start, length);
+
                 return Content(Newtonsoft.Json.JsonConvert.SerializeObject(tPaging), "application/json");
             }
             else
@@ -188,7 +123,7 @@ namespace webui
         public virtual JsonResult UpdateModule(FormCollection frm)
         {
             string sPath = Request.QueryString["path"];
-            clsRequestInfo oRequestInfo = getRequestPathInfo(sPath);
+
 
             var cmd = new clsCmd();
             webUtil.addParamFromPost(cmd, frm);
@@ -198,7 +133,7 @@ namespace webui
             {
                 try
                 {
-                    var result = getTier(oRequestInfo.appName).exec(oRequestInfo.Path, cmd);
+                    var result = webUtil.tier.exec(sPath, cmd);
                     return Json(new { msg = result.Message, data = result.Obj }, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
@@ -220,7 +155,6 @@ namespace webui
         {
 
             string sPath = Request.QueryString["path"];
-            clsRequestInfo oRequestInfo = getRequestPathInfo(sPath);
 
             var cmd = new clsCmd();
             webUtil.addParamFromPost(cmd, frm);
@@ -230,7 +164,7 @@ namespace webui
             {
                 try
                 {
-                    var rpt = getTier(oRequestInfo.appName).getSQLReport(oRequestInfo.Path, cmd);
+                    var rpt = webUtil.tier.getSQLReport(sPath, cmd);
                     Session["rpt"] = rpt;
                     Session["rptName"] = rpt.downloadName.isEmpty() ? sPath : rpt.downloadName;
                     return Json(new { msg = "", data = "" }, JsonRequestBehavior.AllowGet);
@@ -310,10 +244,7 @@ namespace webui
         public clsMsg getFileFromQueryString(System.Collections.Specialized.NameValueCollection qs)
         {
 
-
-
             string sPath = qs["path"];
-            clsRequestInfo oRequestInfo = getRequestPathInfo(sPath);
 
             string[] sKeys = qs.AllKeys;
             var cmd = new clsCmd();
@@ -326,7 +257,7 @@ namespace webui
                 }
             }
 
-            var msg = getTier(oRequestInfo.appName).getFileContent(oRequestInfo.Path, cmd);
+            var msg = webUtil.tier.getFileContent(sPath, cmd);
             return msg;
 
 
@@ -335,7 +266,13 @@ namespace webui
         public ActionResult getFileContent()
         {
             var oFile = getFileFromQueryString(Request.QueryString).Obj as FileData;
+
+            //if (oFile != null && oFile.FileName.isEmpty() == false)
+            //    oFile.ContentType = getContentType2(oFile.FileName);
+
             return File(oFile.Data, oFile.ContentType);
+
+            
         }
 
 
@@ -345,7 +282,6 @@ namespace webui
 
 
             string sPath = Request.QueryString["path"];
-            clsRequestInfo oRequestInfo = getRequestPathInfo(sPath);
 
             var cmd = new clsCmd();
             webUtil.addParamFromPost(cmd, frm);
@@ -355,7 +291,7 @@ namespace webui
             {
                 try
                 {
-                    var msg = getTier(oRequestInfo.appName).getFileContent(oRequestInfo.Path, cmd);
+                    var msg = webUtil.tier.getFileContent(sPath, cmd);
 
                     if (msg.Validated)
                     {
@@ -388,6 +324,44 @@ namespace webui
             return File(oFile.Data, "application/unknown", oFile.FileName);
         }
 
+
+        [NonAction]
+        private string getContentType2(string sFilePath)
+        {
+            string sExtension = System.IO.Path.GetExtension(sFilePath);
+
+            string sContentType = "";
+
+            switch (sExtension.ToLower())
+            {
+                case ".js":
+                    sContentType = "text/javascript";
+                    break;
+                case ".html":
+                case ".htm":
+                    sContentType = "text/html";
+                    break;
+                case ".pdf":
+                    sContentType = "application/pdf";
+                    break;
+                case ".css":
+                    sContentType = "text/css";
+                    break;
+                case ".xml":
+                    sContentType = "text/xml";
+                    break;
+                case ".jpg":
+                case ".gif":
+                    sContentType = "image/*";
+                    break;
+
+                default:
+                    sContentType = "application/unknown";
+                    break;
+            }
+
+            return sContentType;
+        }
 
         [NonAction]
         private ActionResult getContentType(string sFilePath)

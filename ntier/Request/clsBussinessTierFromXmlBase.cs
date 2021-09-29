@@ -107,13 +107,13 @@ namespace NTier.Request
         */
 
         
-        private iGetData getRequest(XmlNode node)
-        {
+        //private iGetData getRequest(XmlNode node)
+        //{
 
-            var myRequest = new NTier.CRUD.clsReadSimple();
-            myRequest.viewName = node.InnerText;
-            return myRequest;
-        }
+        //    var myRequest = new NTier.CRUD.clsReadSimple();
+        //    myRequest.viewName = node.InnerText;
+        //    return myRequest;
+        //}
 
         public clsMsg getData(string sPath, clsCmd cmd)
         {

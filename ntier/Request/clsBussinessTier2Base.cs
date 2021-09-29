@@ -29,15 +29,42 @@ namespace NTier.Request
         public abstract void setCookie(string sKey, string sValue);
         public abstract string getCookie(string sKey);
 
+        public clsBussinessTier2Base(clsAppServerConfigFiles configFiles)
+        {
+
+            foreach (clsAppServerConfigFile configFile in configFiles)
+            {
+                loadXmlFile(configFile.keyAttr, configFile.path);
+            }
+        }
+
+        public void loadXmlFile(string sKeyAttr, string sPath)
+        {
+
+            var xDoc = new XmlDocument();
+            xDoc.Load(sPath);
+            //////////////////////////////////
+            fillAppSettings(sKeyAttr, xDoc);
+            setAdapter(xDoc);
+            setCRUD("", xDoc); // key attribute not required
+            setGetData(sKeyAttr, xDoc);
+            setDropDown(sKeyAttr, xDoc);
+            setCMD(sKeyAttr, xDoc);
+            setSQLReport(sKeyAttr, xDoc);
+            setFileData(sKeyAttr, xDoc);
+
+        }
+
+
         public clsBussinessTier2Base(clsAppServerBase appServerInfo
             , string sMainApp)
         {
-
 
             _appServerInfo = appServerInfo;
 
             var xDocParent = new XmlDocument();
             var xDoc = new XmlDocument();
+
             string sPath = _appServerInfo.getAppConfigFilePath();
             if (System.IO.File.Exists(sPath))
                 xDoc.Load(_appServerInfo.getAppConfigFilePath());
@@ -46,43 +73,32 @@ namespace NTier.Request
             if (System.IO.File.Exists(sPath))
                 xDocParent.Load(sPath);
 
-            fillAppSettings(xDoc);
-            fillAppSettings(xDocParent);
+            fillAppSettings("", xDoc);
+            fillAppSettings("", xDocParent);
 
             setAdapter(xDoc);
             setAdapter(xDocParent);
 
 
-            setCRUD(xDoc);
-            setCRUD(xDocParent);
+            setCRUD("", xDoc);
+            setCRUD("", xDocParent);
 
 
-            setGetData(xDoc);
-            setGetData(xDocParent);
+            setGetData("", xDoc);
+            setGetData("", xDocParent);
 
-            setDropDown(xDoc);
-            setDropDown(xDocParent);
-
-
-            setCMD(xDoc);
-            setCMD(xDocParent);
-
-            setSQLReport(xDoc);
-            setSQLReport(xDocParent);
-
-            setFileData(xDoc);
-            setFileData(xDocParent);
+            setDropDown("", xDoc);
+            setDropDown("", xDocParent);
 
 
+            setCMD("", xDoc);
+            setCMD("", xDocParent);
 
-            //testing
-            /*
-            foreach(string skey in clnAppSettings.AllKeys)
-            {
-                Console.Write("{0} : {1} \n", skey, clnAppSettings[skey]);
-            }
-             */
+            setSQLReport("", xDoc);
+            setSQLReport("", xDocParent);
 
+            setFileData("", xDoc);
+            setFileData("", xDocParent);
         }
 
         private void setAdapter(XmlDocument xDoc)
@@ -110,12 +126,11 @@ namespace NTier.Request
 
         }
 
-        private void fillAppSettings(XmlDocument xDoc)
+        private void fillAppSettings(string sKeyAttr, XmlDocument xDoc)
         {
 
             //checking if xdoc is not available then return
             if (xDoc == null) return;
-
             XmlNodeList _nodeList = xDoc.SelectNodes("//appConfig/appSettings/appSetting");
 
             //if appsettings node not found, return;
@@ -124,19 +139,19 @@ namespace NTier.Request
 
             foreach (XmlNode node in _nodeList)
             {
-                string sKey = node.getXmlAttributeValue("key");
+                string sKey = sKeyAttr + node.getXmlAttributeValue("key");
                 if (clnAppSettings.AllKeys.Contains(sKey) == false)
                 {
                     clnAppSettings.Set(sKey, node.InnerText);
                 }
             }
 
-
-            clnAppSettings.Set("AppServerPath", _appServerInfo.getAppConfigFolder());
+            if (_appServerInfo != null)
+                clnAppSettings.Set("AppServerPath", _appServerInfo.getAppConfigFolder());
 
         }
 
-        public void setCRUD(XmlDocument xDoc)
+        public void setCRUD(string sKeyAttr, XmlDocument xDoc)
         {
 
             if (xDoc == null) return;
@@ -147,7 +162,7 @@ namespace NTier.Request
             foreach (XmlNode xNode in xNodeList)
             {
 
-                string sKey = xNode.getXmlAttributeValue("name");
+                string sKey = sKeyAttr + xNode.getXmlAttributeValue("name");
                 string sTableName = xNode.getXmlAttributeValue("tableName");
                 string sViewName = xNode.getXmlAttributeValue("viewName");
                 string sPrimaryKeyField = xNode.getXmlAttributeValue("primaryKey");
@@ -163,7 +178,7 @@ namespace NTier.Request
             }
         }
 
-        private void setGetData(XmlDocument xDoc)
+        private void setGetData(string sKeyAttr, XmlDocument xDoc)
         {
             if (xDoc == null) return;
             XmlNodeList xNodeList = xDoc.SelectNodes("//appConfig/requestData[@type='getData']/dt");
@@ -171,11 +186,11 @@ namespace NTier.Request
 
             foreach (XmlNode xNode in xNodeList)
             {
-                tmp(xNode, clnGetData);
+                addGetData(sKeyAttr, xNode, clnGetData);
             }
         }
 
-        private void setDropDown(XmlDocument xDoc)
+        private void setDropDown(string sKeyAttr, XmlDocument xDoc)
         {
             if (xDoc == null) return;
             XmlNodeList xNodeList = xDoc.SelectNodes("//appConfig/requestData[@type='DropDown']/dt");
@@ -183,16 +198,16 @@ namespace NTier.Request
 
             foreach (XmlNode xNode in xNodeList)
             {
-                tmp(xNode, clnDropDown);
+                addGetData(sKeyAttr, xNode, clnDropDown);
             }
         }
 
 
 
-        private void tmp(XmlNode xNode, Dictionary<string, NTier.Request.clsRequestGetDataBase> cln)
+        private void addGetData(string sKeyAttr, XmlNode xNode, Dictionary<string, NTier.Request.clsRequestGetDataBase> cln)
         {
             string sType = xNode.getXmlAttributeValue("type");
-            string sKey = xNode.getXmlAttributeValue("name");
+            string sKey = sKeyAttr + xNode.getXmlAttributeValue("name");
 
             if (cln.ContainsKey(sKey)) return;
 
@@ -235,7 +250,7 @@ namespace NTier.Request
             }
         }
 
-        private void setCMD(XmlDocument xDoc)
+        private void setCMD(string sKeyAttr, XmlDocument xDoc)
         {
             if (xDoc == null) return;
 
@@ -243,9 +258,10 @@ namespace NTier.Request
             foreach (XmlNode xNode in xNodeList)
             {
 
-                string skey = xNode.getXmlAttributeValue("name");
-                if (clnCmd.ContainsKey(skey)) continue;
+                string sNodeName = xNode.getXmlAttributeValue("name");
+                if (clnCmd.ContainsKey(sNodeName)) continue;
 
+                string sKey = sKeyAttr + sNodeName;
                 string sType = xNode.getXmlAttributeValue("type");
                 string sCRUDName = xNode.getXmlAttributeValue("crudName");
 
@@ -260,7 +276,7 @@ namespace NTier.Request
                         setValidationFrom_Node(xNode, objSave.oValidation);
                         objSave.setTier(this);
 
-                        clnCmd.Add(skey, objSave);
+                        clnCmd.Add(sKey, objSave);
                         break;
 
                     case "delete":
@@ -271,7 +287,7 @@ namespace NTier.Request
                         setValidationFrom_Node(xNode, objDelete.oValidation);
                         objDelete.setTier(this);
 
-                        clnCmd.Add(skey, objDelete);
+                        clnCmd.Add(sKey, objDelete);
                         break;
                     case "other":
                         string sAssemblyName = xNode.getXmlAttributeValue("assemblyName");
@@ -288,7 +304,7 @@ namespace NTier.Request
 
                         objother.setTier(this);
 
-                        clnCmd.Add(skey, objother);
+                        clnCmd.Add(sKey, objother);
                         break;
 
                     case "cmd":
@@ -298,14 +314,14 @@ namespace NTier.Request
                         setValidationFrom_Node(xNode, objSQL.oValidation);
                         objSQL.setTier(this);
 
-                        clnCmd.Add(skey, objSQL);
+                        clnCmd.Add(sKey, objSQL);
                         break;
                 }
             }
         }
 
 
-        private void setSQLReport(XmlDocument xDoc)
+        private void setSQLReport(string sKeyAttr, XmlDocument xDoc)
         {
             if (xDoc == null) return;
 
@@ -314,7 +330,7 @@ namespace NTier.Request
             foreach (XmlNode xNode in xNodeList)
             {
 
-                string sName = xNode.getXmlAttributeValue("name");
+                string sKey = sKeyAttr + xNode.getXmlAttributeValue("name");
                 string sRdlPath = xNode.getXmlAttributeValue("rdlPath");
                 string downloadName = xNode.getXmlText("downloadName");
 
@@ -325,17 +341,12 @@ namespace NTier.Request
                 osqlReport.rdlPath = sRdlPath;
                 osqlReport.downloadName = downloadName;
 
-
-                clnSQLReport.Add(sName, osqlReport);
-
-
+                clnSQLReport.Add(sKey, osqlReport);
             }
-
-
         }
 
 
-        private void setFileData(XmlDocument xDoc)
+        private void setFileData(string sKeyAttr, XmlDocument xDoc)
         {
             if (xDoc == null) return;
 
@@ -344,7 +355,7 @@ namespace NTier.Request
             foreach (XmlNode xNode in xNodeList)
             {
 
-                string sName = xNode.getXmlAttributeValue("name");
+                string sKey = sKeyAttr + xNode.getXmlAttributeValue("name");
                 string sAssemblyName = xNode.getXmlAttributeValue("assemblyName");
                 string sClassPath = xNode.getXmlAttributeValue("classPath");
                 string sFunc = xNode.getXmlAttributeValue("func");
@@ -355,11 +366,8 @@ namespace NTier.Request
                 obj.assemblyName = sAssemblyName;
                 obj.classPath = sClassPath;
                 obj.func = sFunc;
-                clnFileData.Add(sName, obj);
-
+                clnFileData.Add(sKey, obj);
             }
-
-
         }
 
 
@@ -436,7 +444,7 @@ namespace NTier.Request
                         oValidation.addEmailField(sFieldName, sFieldTitle, required);
                         break;
                     case "numeric":
-                        oValidation.addNumberField(sFieldName, sFieldTitle, required,true,iMaxLength);
+                        oValidation.addNumberField(sFieldName, sFieldTitle, required, true, iMaxLength);
                         break;
                     case "check":
                         string checkContraintValues = xnodeValidate.getXmlAttributeValue("values");
@@ -468,11 +476,8 @@ namespace NTier.Request
             {
                 throw new Exception(string.Format("Path key [{0}]not found !", sPath));
             }
-
             var obj = clnGetData[sPath];
             return obj.getData(cmd);
-
-
         }
 
         public clsMsg getDropDownData(string sPath, clsCmd cmd)

@@ -17,12 +17,12 @@ namespace System
 
             List<string> lstString = new List<string>();
             DataRow[] rows = t.Select(sFilter);
-
+            
             foreach (DataRow r in rows)
             {
                 lstString.Add(r[sField].ToString());
             }
-
+            
             return string.Join(sSeprator, lstString.ToArray());
         }
 

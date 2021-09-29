@@ -55,14 +55,7 @@ namespace System
 
             return builder.ToString();
         }
-
-
-
-
-
-
-
-
+        
         public static DataTable readCSV(string sPath)
         {
             string CSVFilePathName = sPath;
@@ -87,7 +80,7 @@ namespace System
             return dt;
         }
 
-        
+
 
         public static DataTable createTableStringArray(params string[] sVals)
         {
@@ -237,8 +230,8 @@ namespace System
         public static clsMsg msg_exception(Exception ex)
         {
             StringBuilder sb1 = new StringBuilder();
-            int i=0;
-            Exception ex1 =ex;
+            int i = 0;
+            Exception ex1 = ex;
             do
             {
                 if (ex1 != null)

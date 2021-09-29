@@ -60,6 +60,8 @@ namespace NTier.sqlbuilder
 
                     string sField = string.IsNullOrWhiteSpace(f.TableName) ? f.Name : f.TableName + "." + f.Name;
                     lst.Add(string.Format(" ( {0} {1} {2})", sField, sOperator, sVal));
+                    
+
                 }
             }
 
